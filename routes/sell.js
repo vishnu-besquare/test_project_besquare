@@ -8,7 +8,7 @@ var data2;
 
 // Get current price
 
-router.route("/Xau").get(authorization, async (req, res) => {
+router.route("/Xau").put(authorization, async (req, res) => {
   const amount = req.body.amount;
 
   try {

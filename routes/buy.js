@@ -28,7 +28,7 @@ router.route("/").get(authorization, async (req, res) => {
 
 // Get current price
 
-router.route("/Xau").get(authorization, async (req, res) => {
+router.route("/Xau").put(authorization, async (req, res) => {
   // res.status(200);
   // res.send(Math.floor(Math.random() * 100 + 1).toString());
 
