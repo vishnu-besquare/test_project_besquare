@@ -19,6 +19,7 @@ const topup = require("./routes/topup");
 const sellRouter = require("./routes/sell");
 const resetPassword = require("./routes/resetPassword");
 const display = require("./routes/display");
+const updateNumber = require("./routes/updateNumber");
 
 app.use("/exercises", exercisesRouter);
 app.use("/users", usersRouter);
@@ -29,6 +30,7 @@ app.use("/topup", topup);
 app.use("/sell", sellRouter);
 app.use("/resetPassword", resetPassword);
 app.use("/display", display);
+app.use("/updateUser", updateNumber);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

@@ -69,8 +69,8 @@ router.post(
       );
 
       const newAsset = await pool.query(
-        "Insert into vishnschema.asset (user_id,gold_amount) values ($1,$2) returning *",
-        [getUserId.rows[0].user_id, 0]
+        "Insert into vishnschema.asset (user_id,gold_amount,silver_amount,paladium_amount,platinum_amount) values ($1,$2,$3,$4,$5) returning *",
+        [getUserId.rows[0].user_id, 0, 0, 0, 0]
       );
 
       // 5. Generating jwt token

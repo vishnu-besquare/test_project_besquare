@@ -40,6 +40,12 @@ router.route("/Xau").put(authorization, async (req, res) => {
         "select gold_amount from vishnschema.asset where user_id=$1",
         [req.user]
       );
+      console.log("amount owned");
+      console.log(getAmountOwned.rows[0].gold_amount);
+      console.log("amount earned");
+      console.log(amountEarned);
+      console.log("amount ");
+      console.log(amount);
       //   console.log(typeof getbalance.rows[0].balance);
       //   var hello = Number(getbalance);
       //   console.log(hello + 1);
