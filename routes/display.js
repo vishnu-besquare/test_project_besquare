@@ -16,7 +16,7 @@ router.route("/balance").get(authorization, async (req, res) => {
 
   try {
     const getbalance = await pool.query(
-      "select balance from vishnschema.wallet where user_id=$1",
+      "select balance from drc_schema.wallet where user_id=$1",
       [req.user]
     );
 
@@ -36,7 +36,7 @@ router.route("/transaction").get(authorization, async (req, res) => {
 
   try {
     const getTransactionTable = await pool.query(
-      "select * from vishnschema.transaction where user_id=$1",
+      "select * from drc_schema.transaction where user_id=$1",
       [req.user]
     );
 
@@ -55,7 +55,7 @@ router.route("/payment").get(authorization, async (req, res) => {
 
   try {
     const getPaymentTable = await pool.query(
-      "select * from vishnschema.payment where user_id=$1",
+      "select * from drc_schema.payment where user_id=$1",
       [req.user]
     );
 
@@ -74,7 +74,7 @@ router.route("/user").get(authorization, async (req, res) => {
 
   try {
     const getUserTable = await pool.query(
-      "select * from vishnschema.users where user_id=$1",
+      "select * from drc_schema.users where user_id=$1",
       [req.user]
     );
 
@@ -93,7 +93,7 @@ router.route("/asset").get(authorization, async (req, res) => {
 
   try {
     const getAssetTable = await pool.query(
-      "select * from vishnschema.asset where user_id=$1",
+      "select * from drc_schema.asset where user_id=$1",
       [req.user]
     );
 

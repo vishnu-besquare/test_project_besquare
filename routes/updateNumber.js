@@ -13,7 +13,7 @@ router.route("/").put(authorization, async (req, res) => {
       [newNumber, req.user]
     );
 
-    res.json("Update User Succesful");
+    res.json("Update User Successful");
   } catch (err) {
     res.json(err.message);
   }

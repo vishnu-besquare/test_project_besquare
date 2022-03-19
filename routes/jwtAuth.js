@@ -11,7 +11,8 @@ const authorization = require("../middleware/authorization");
 router.post(
   "/signup",
   [
-    check("name", "Please provide a valid name").isString(),
+    check("first_name", "Please provide a valid name").isString(),
+    check("last_name", "Please provide a valid name").isString(),
     check("email", "Please provide a valid email address").isEmail(),
     check("password", "Please provide a valid password").isLength({
       min: 6,
@@ -22,11 +23,11 @@ router.post(
     try {
       // 1. Destructure the req.body(name,email,password)
 
-      const { name, email, password } = req.body;
+      const { email, password, first_name, last_name } = req.body;
 
       // 2. Check if user exist (if exist then throw error)
       const user = await pool.query(
-        "SELECT * FROM vishnschema.users WHERE user_email = $1",
+        "SELECT * FROM drc_schema.users WHERE user_email = $1",
         [email]
       );
 
@@ -52,24 +53,24 @@ router.post(
 
       // 4. Enter the new user inside our database
       const newUser = await pool.query(
-        "INSERT INTO vishnschema.users (user_name, user_email, user_password) VALUES ($1, $2, $3) RETURNING *",
-        [name, email, bcryptPassword]
+        "INSERT INTO drc_schema.users (user_email, user_password, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING *",
+        [email, bcryptPassword, first_name, last_name]
       );
 
       const getUserId = await pool.query(
-        "select user_id from vishnschema.users where user_email = $1",
+        "select user_id from drc_schema.users where user_email = $1",
         [email]
       );
 
       // console.log(getUserId.rows[0].user_id);
 
       const newWallet = await pool.query(
-        "Insert into vishnschema.wallet (user_id,balance) values ($1,$2) returning *",
+        "Insert into drc_schema.wallet (user_id,balance) values ($1,$2) returning *",
         [getUserId.rows[0].user_id, 0]
       );
 
       const newAsset = await pool.query(
-        "Insert into vishnschema.asset (user_id,gold_amount,silver_amount,paladium_amount,platinum_amount) values ($1,$2,$3,$4,$5) returning *",
+        "Insert into drc_schema.asset (user_id,gold_amount,platinum_amount,silver_amount,palladium_amount) values ($1,$2,$3,$4,$5) returning *",
         [getUserId.rows[0].user_id, 0, 0, 0, 0]
       );
 
@@ -103,7 +104,7 @@ router.post(
       // 2. check if user doesnt exist (if not then we throw error)
 
       const user = await pool.query(
-        "SELECT * FROM vishnschema.users WHERE user_email = $1",
+        "SELECT * FROM drc_schema.users WHERE user_email = $1",
         [email]
       );
 
